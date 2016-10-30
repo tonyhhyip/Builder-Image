@@ -6,3 +6,5 @@ node_modules
 *.swp
 
 /.idea/
+
+webpack.json
