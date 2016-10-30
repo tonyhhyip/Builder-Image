@@ -1,3 +1,3 @@
-# Builder Image
+# Builder Base Image
 
-Docker Images for build sites
+Docker Images, Basic Files and Directories for build sites
