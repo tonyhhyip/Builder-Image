@@ -19,10 +19,10 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-util": "^3.0.7",
-    "nunjucks": "^2.5.2",
+    "nunjucks": "^3.0.0",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2",
-    "webpack-merge": "^0.15.0"
+    "webpack-merge": "^1.0.1"
   },
   "dependencies": {},
   "babel": {

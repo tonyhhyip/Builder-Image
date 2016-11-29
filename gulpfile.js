@@ -20,6 +20,8 @@ const fs = require('fs');
 
 const WebpackDevServer = require('webpack-dev-server');
 
+const {NODE_ENV} = process.env;
+
 gulp.task('image', () => {
   return gulp.src('./assets/images/**/*.*')
     .pipe(imagemin())
@@ -41,8 +43,8 @@ gulp.task('css', () => {
 
 gulp.task('page', () => {
   const env = new nunjucks.Environment([
-    new nunjucks.FileSystemLoader('./assets/pages'),
-    new nunjucks.FileSystemLoader('./assets/layouts')
+    new nunjucks.FileSystemLoader('./assets/pages', {watch: NODE_ENV !== 'production'}),
+    new nunjucks.FileSystemLoader('./assets/layouts', {watch: NODE_ENV !== 'production'})
   ]);
   return gulp.src('./assets/pages/*.jinja')
     .pipe(jinja.compile({}, {env}))
@@ -59,7 +61,6 @@ gulp.task('server', () => {
     entry: {
       app: [
         'webpack-dev-server/client?http://localhost:8080/',
-        'webpack/hot/dev-server',
         './assets/js/app'
       ]
     }
@@ -89,7 +90,7 @@ gulp.task('server', () => {
 gulp.task('js', (cb) => {
   webpack(config, (e, stats) => {
     if (e) {
-      throw new PluginError('[webpack]', e);
+      throw new webpack.PluginError('[webpack]', e);
     } else {
       log('[webpack]', stats.toString({
         version: true,
@@ -124,7 +125,7 @@ gulp.task('watch:image', () => {
 });
 
 gulp.task('watch', ['watch:image', 'watch:page', 'watch:css']);
-gulp.task('build:dev', ['image', 'css', 'page', 'server']);
+gulp.task('build:dev', ['js', 'image', 'css', 'page', 'server']);
 gulp.task('dev', ['build:dev', 'watch']);
 gulp.task('build', ['image', 'css', 'page', 'js']);
 
