@@ -92,7 +92,7 @@ gulp.task('js', (cb) => {
     if (e) {
       throw new webpack.PluginError('[webpack]', e);
     } else {
-      log('[webpack]', stats.toString({
+      util.log('[webpack]', stats.toString({
         version: true,
         timings: true,
         assets: true,
