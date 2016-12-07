@@ -1,6 +1,6 @@
 'use strict';
 
-const gulp = require('gulp');
+const gulp = require('gulp-help')(require('gulp'));
 const util = require('gulp-util');
 const rename = require('gulp-rename');
 
@@ -22,14 +22,14 @@ const WebpackDevServer = require('webpack-dev-server');
 
 const {NODE_ENV} = process.env;
 
-gulp.task('image', () => {
+gulp.task('image', 'Build imagemin version of ./assets/images/**/* into ./public/images', () => {
   return gulp.src('./assets/images/**/*.*')
     .pipe(imagemin())
     .on('error', util.log)
     .pipe(gulp.dest('public/images'));
 });
 
-gulp.task('css', () => {
+gulp.task('css', 'Build ./assets/scss/*.scss into ./public', () => {
   return gulp.src('./assets/scss/*.scss')
     .pipe(sass())
     .on('error', util.log)
@@ -41,7 +41,7 @@ gulp.task('css', () => {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('page', () => {
+gulp.task('page', 'Build ./assets/pages/*.jinja into HTML files', () => {
   const env = new nunjucks.Environment([
     new nunjucks.FileSystemLoader('./assets/pages', {watch: NODE_ENV !== 'production'}),
     new nunjucks.FileSystemLoader('./assets/layouts', {watch: NODE_ENV !== 'production'})
@@ -56,7 +56,7 @@ gulp.task('page', () => {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('server', () => {
+gulp.task('server', 'Start a webpack-dev-server for the project at http://localhost:8080', () => {
   const devConfig = merge(config, {
     entry: {
       app: [
@@ -87,7 +87,7 @@ gulp.task('server', () => {
   server.listen(8080);
 });
 
-gulp.task('js', (cb) => {
+gulp.task('js', 'Build javascripts bundle into ./public/js/app.js', (cb) => {
   webpack(config, (e, stats) => {
     if (e) {
       throw new webpack.PluginError('[webpack]', e);
@@ -106,26 +106,26 @@ gulp.task('js', (cb) => {
   });
 });
 
-gulp.task('watch:css', () => {
+gulp.task('watch:css', false, () => {
   return gulp.watch([
     './assets/scss/**/*.scss'
   ], ['css']);
 });
 
-gulp.task('watch:page', () => {
+gulp.task('watch:page', false, () => {
   return gulp.watch([
     './assets/pages/**/*.jinja'
   ], ['page']);
 });
 
-gulp.task('watch:image', () => {
+gulp.task('watch:image', false, () => {
   return gulp.watch([
     './assets/images/**/*.*'
   ], ['image']);
 });
 
-gulp.task('watch', ['watch:image', 'watch:page', 'watch:css']);
-gulp.task('build:dev', ['js', 'image', 'css', 'page', 'server']);
-gulp.task('dev', ['build:dev', 'watch']);
-gulp.task('build', ['image', 'css', 'page', 'js']);
-
+gulp.task('watch', 'Monitor and rebuild images, pages and css files.',
+  ['watch:image', 'watch:page', 'watch:css']);
+gulp.task('build:dev', false, ['js', 'image', 'css', 'page', 'server']);
+gulp.task('dev', 'Development mode. Starts',['build:dev', 'watch']);
+gulp.task('build', 'Build the site.', ['image', 'css', 'page', 'js']);
