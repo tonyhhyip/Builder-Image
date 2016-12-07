@@ -2,6 +2,12 @@
   "name": "404busters-page",
   "version": "1.0.0",
   "description": "Website of 404 busters",
+  "scripts": {
+    "build": "NODE_ENV=production ./node_modules/.bin/gulp build",
+    "dev": "./node_modules/.bin/gulp dev",
+    "help": "./node_modules/.bin/gulp help",
+    "watch": "./node_modules/.bin/gulp watch"
+  },
   "repository": {
     "url": "git+https://github.com/404busters/404busters.github.io",
     "type": "git"
