@@ -1,4 +1,4 @@
-FROM node:6-alphine
+FROM node:6
 MAINTAINER 404 Busters Team
 LABEL image.version="v0.1.0-dev" \
       image.is-alpha="" \
@@ -12,6 +12,7 @@ VOLUME ["/app/public", "/app/assets"]
 
 # install proper modules
 COPY . /app
+RUN apk add g++ make python --no-cache
 RUN ls -l \
     && npm install -g yarn \
     && npm install node-sass \
