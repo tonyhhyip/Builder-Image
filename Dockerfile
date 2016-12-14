@@ -22,5 +22,5 @@ RUN ls -l \
     && ls -l
 
 # to actually build the public folder
-ENTRYPOINT ["./scripts/run.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["build"]
