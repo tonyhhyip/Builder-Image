@@ -14,3 +14,6 @@ Dockerfile
 # ignore log files
 webpack.json
 *.log
+
+/.idea
+*.iml
