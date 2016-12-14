@@ -1,6 +1,9 @@
-# Builder Base Image
+# Builder Base Image [![Travis CI][travis-badge]][travis]
 
 Docker Images, Basic Files and Directories for build sites
+
+[travis]: https://travis-ci.org/404busters/Builder-Image?branch=master
+[travis-badge]: https://travis-ci.org/yookoala/Builder-Image.svg?branch=master
 
 
 ## Development and Local Build
@@ -28,9 +31,15 @@ You may run your site with the development mode:
 yarn dev
 ```
 
-### Build the Site
+The resulting files will be in the folder "[./public](public)" and a development
+server will be started listing at "[http://localhost:8080](http://localhost:8080)".
 
-You may build the site in `./public` with the command:
+### Build the Site with your OS
+
+You may build the production site directly with NodeJS in your OS. The
+resulting files will be in the folder "[./public](public)".
+
+The command to build the whole site:
 
 ```bash
 yarn build
@@ -46,11 +55,62 @@ options with the help command:
 
 ## Building with Docker
 
-You may use this repository to build your site in a [Docker][docker] image.
+You may use this repository to build your site with a [Docker][docker] image.
 
 [docker]: https://www.docker.com/
 
+### Build the Docker Image
+
+If you prefer to build your own docker image, you will first need to make sure
+you local docker have proper network setup. On Ubuntu, you should edit the file
+`/etc/default/docker`. Find this line and uncomment it.
+
+```
+DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
+```
+
+Run this after the change:
+
+```bash
+sudo systemctl restart docker
+```
+
+Then build the image with this command:
+
+```bash
+docker build -t="404busters/builder" .
+```
 
 ### Build the Site
 
-(coming soon)
+With the docker image in your local docker system, you have to define a local
+folder to receive the result. Assume you want to have the files built into
+`$PWD/public`:
+
+```bash
+docker run --name builder -it --rm \
+ -v $PWD/public:/app/public 404busters/builder
+```
+
+Please replace the folder `$PWD/public` to a path that suit your needs.
+
+### Interactive Development
+
+You may also use the image in interactive development mode. You'll need to
+specify the `assets` folder to build from. For example, if your developing
+assets are located at `$PWD/myAssets`:
+
+```bash
+docker run --name builder -it --rm \
+  -v $PWD/public:/app/public -v $PWD/assets:/app/assets \
+  404busters/builder dev
+```
+
+### More Commands
+
+Docker will pass all the commands to the gulp. You may see all the command
+options with this:
+
+```bash
+docker run --name builder -it --rm 404busters/builder help
+```
