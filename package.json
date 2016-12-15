@@ -5,6 +5,7 @@
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/.bin/gulp build",
     "dev": "./node_modules/.bin/gulp dev",
+    "gulp": "./node_modules/.bin/gulp",
     "help": "./node_modules/.bin/gulp help",
     "watch": "./node_modules/.bin/gulp watch"
   },

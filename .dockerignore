@@ -1,0 +1,16 @@
+# prevent copying node_modules to
+# docker image before build
+node_modules/*
+
+# ignore the build target
+public
+
+# ignore markdown documenation
+*.md
+
+# ignore docker file
+Dockerfile
+
+# ignore log files
+webpack.json
+*.log

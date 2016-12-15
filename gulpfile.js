@@ -1,6 +1,7 @@
 'use strict';
 
 const gulp = require('gulp-help')(require('gulp'));
+const gutil = require("gulp-util");
 const util = require('gulp-util');
 const rename = require('gulp-rename');
 
@@ -90,7 +91,7 @@ gulp.task('server', 'Start a webpack-dev-server for the project at http://localh
 gulp.task('js', 'Build javascripts bundle into ./public/js/app.js', (cb) => {
   webpack(config, (e, stats) => {
     if (e) {
-      throw new webpack.PluginError('[webpack]', e);
+      throw new gutil.PluginError('[webpack]', e);
     } else {
       util.log('[webpack]', stats.toString({
         version: true,
