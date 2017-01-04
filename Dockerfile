@@ -11,14 +11,10 @@ WORKDIR /app
 VOLUME ["/app/public", "/app/assets"]
 
 # install proper modules
-COPY . /app
 RUN apk add g++ make python --no-cache
+COPY . /app
 RUN ls -l \
-    && npm install -g yarn \
-    && npm install node-sass \
-    && yarn install --ignore-optional \
-    && npm cache clean \
-    && yarn cache clean \
+    && npm install --quiet 2 > /dev/null \
     && ls -l
 
 # to actually build the public folder
