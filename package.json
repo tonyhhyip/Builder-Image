@@ -16,6 +16,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^6.6.1",
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.9",
     "babel-plugin-syntax-flow": "^6.18.0",
@@ -28,6 +29,7 @@
     "gulp-htmlmin": "^3.0.0",
     "gulp-imagemin": "^3.1.0",
     "gulp-nunjucks": "^2.3.0",
+    "gulp-postcss": "^6.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.0.0",
     "gulp-util": "^3.0.7",
