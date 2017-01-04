@@ -8,15 +8,16 @@ LABEL image.version="v0.1.0-dev" \
 
 # basic image setup
 WORKDIR /app
-VOLUME ["/app/public", "/app/assets"]
+VOLUME ["/public", "/assets"]
 
 # install proper modules
 RUN apk add g++ make python --no-cache
 COPY . /app
 RUN ls -l \
-    && npm install --quiet 2 > /dev/null \
+    && npm install -g --quiet gulp \
+    && npm install --quiet \
     && ls -l
 
 # to actually build the public folder
-ENTRYPOINT ["./docker-entrypoint.sh"]
+ENTRYPOINT ["sh", "./docker-entrypoint.sh"]
 CMD ["build"]

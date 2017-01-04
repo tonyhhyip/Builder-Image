@@ -1,6 +1,6 @@
 # prevent copying node_modules to
 # docker image before build
-node_modules/*
+node_modules
 
 # ignore the build target
 public

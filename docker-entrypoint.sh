@@ -1,7 +1,6 @@
 #!/bin/bash
 
-DIR="$( cd "$(dirname $( dirname "${BASH_SOURCE[0]}" ))" && pwd )"
-cd "$DIR"
+cd /app
 
 if [ "$1" == "build" ] || [ "$1" == "" ]; then
   # actually build the site
