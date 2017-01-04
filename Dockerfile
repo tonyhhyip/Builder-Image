@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:6-alpine
 MAINTAINER 404 Busters Team
 LABEL image.version="v0.1.0-dev" \
       image.is-alpha="" \
