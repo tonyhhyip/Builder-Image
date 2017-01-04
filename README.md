@@ -8,20 +8,31 @@ Docker Images, Basic Files and Directories for build sites
 
 ## Development and Local Build
 
-To use this builder directly, you need to install `node` (> 6.8)
-and `yarn` (> 0.16).
+To use this builder directly, you need to install `node` (>= 6.9) and `yarn` (> 0.16).
+As `node-gyp` is using, you have to install **make**, **g++** and **python**.
 
-It is recommended to use [nvm][nvm] for the installation. After nvm
+### Debian and Ubuntu
+
+```bash
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+curl -sS https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
+echo "deb https://deb.nodesource.com/node_6.x $(lsb_release -s -c) main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+echo "deb-src https://deb.nodesource.com/node_6.x $(lsb_release -s -c) main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+```
+
+### Mac
+It is recommended to use [nvm][https://github.com/creationix/nvm] for the installation. After nvm
 was setup:
 
 ```bash
-nvm install stable.
+nvm install stable
 nvm use stable
 npm install -g yarn
 ```
 
-[nvm]: https://github.com/creationix/nvm
-
+### Windows
+God bless you
 
 ### Development
 
