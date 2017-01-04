@@ -1,0 +1,26 @@
+language: node_js
+sudo: false
+cache: yarn
+
+node_js:
+  - '6'
+
+env:
+  global:
+  - CXX=g++-4.8
+  - NODE_ENV=production
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+
+install:
+- yarn install --verbose --ignore-optional --pure-lockfile
+- yarn global add gulp
+
+script:
+- yarn build
+- yarn test
