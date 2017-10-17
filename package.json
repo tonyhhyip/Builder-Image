@@ -61,6 +61,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "glob": "^7.1.2",
     "gravatar": "^1.6.0",
     "js-yaml": "^3.10.0"
   },
